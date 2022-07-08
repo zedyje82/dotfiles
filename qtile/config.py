@@ -16,6 +16,7 @@ mod = "mod4"
 my_terminal = "alacritty"
 my_browser = "firefox"
 my_file_manager = "pcmanfm"
+screenshot = "scrot -e 'mv $f ~/Imagens/screenshots/Screenshot%Y-%m-%d%H:%M:%S.png'"
 
 # Shortcuts
 keys = [
@@ -34,6 +35,9 @@ keys = [
     # Screen brightness control
     Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 15")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 15")),
+
+    # Screenshot
+    Key([mod], "z", lazy.spawn(screenshot)),
 
     # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -75,7 +79,7 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
 
-groups = [Group(i) for i in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]]
+groups = [Group(i) for i in ["web", "dev", "sys", "doc", "vbox", "chat", "mus", "vid", "game"]]
 group_hotkey = "123456789"
 
 for g, k in zip(groups, group_hotkey):
@@ -220,81 +224,53 @@ screens = [
                       foreground = colors["black0"],
                       background = colors["black0"]),
               widget.TextBox(
-                      text="",
-                      padding = 0,
-                      fontsize = 20,
-                      foreground = colors["red0"],
+                      text="|",
+                      padding = 2,
+                      fontsize = 14,
+                      foreground = colors["gray0"],
                       background = colors["black0"]),
               widget.CPU(
-                      foreground = colors["black0"],
-                      background = colors["red0"],
-                      format = ' CPU:{load_percent}% {freq_current}ghz',
+                      foreground = colors["red0"],
+                      background = colors["black0"],
+                      format = ' CPU {load_percent}%',
                       padding = 0),
               widget.TextBox(
-                      text="",
-                      padding = 0,
-                      fontsize = 20,
-                      foreground = colors["red0"],
-                      background = colors["black0"]
-                      ),
-              widget.TextBox(
-                      text = "",
-                      padding = 0,
-                      fontsize = 20,
-                      foreground = colors["peach"],
+                      text="|",
+                      padding = 2,
+                      fontsize = 14,
+                      foreground = colors["gray0"],
                       background = colors["black0"]
                       ),
               widget.Memory(
-                      foreground = colors["black0"],
-                      background = colors["peach"],
-                      format = ' Mem:{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
+                      foreground = colors["peach"],
+                      background = colors["black0"],
+                      format = ' Mem {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
                       padding = 0
                       ),
               widget.TextBox(
-                      text="",
-                      padding = 0,
-                      fontsize = 20,
-                      foreground = colors["peach"],
-                      background = colors["black0"]
-                      ),
-              widget.TextBox(
-                      text="",
-                      padding = 0,
-                      fontsize = 20,
-                      foreground = colors["mauve"],
+                      text="|",
+                      padding = 2,
+                      fontsize = 14,
+                      foreground = colors["gray0"],
                       background = colors["black0"],
                       ),
               widget.Volume(
                       fmt='墳 {}',
-                      foreground = colors["black0"],
-                      background = colors["mauve"],
-                      padding = 5),
-              widget.TextBox(
-                      text = "",
-                      padding = 0,
-                      fontsize = 20,
                       foreground = colors["mauve"],
                       background = colors["black0"],
-                      ),
+                      padding = 5),
               widget.TextBox(
-                      text="",
-                      padding=0,
-                      fontsize=20,
-                      foreground = colors["pink"],
+                      text="|",
+                      padding = 2,
+                      fontsize = 14,
+                      foreground = colors["gray0"],
                       background = colors["black0"]
                       ),
               widget.Clock(
-                       foreground = colors["black0"],
-                       background = colors["pink"],
+                       foreground = colors["pink"],
+                       background = colors["black0"],
                        format = " %a, %d %b - %H:%M",
                        padding = 5
-                       ),
-              widget.TextBox(
-                       text="",
-                       padding=0,
-                       fontsize=20,
-                       foreground = colors["pink"],
-                       background = colors["black0"]
                        ),
             ],
             20,
