@@ -261,19 +261,19 @@ screens = [
                       text="",
                       padding = 0,
                       fontsize = 20,
-                      foreground = colors["teal"],
+                      foreground = colors["mauve"],
                       background = colors["black0"],
                       ),
               widget.Volume(
                       fmt='墳 {}',
                       foreground = colors["black0"],
-                      background = colors["teal"],
+                      background = colors["mauve"],
                       padding = 5),
               widget.TextBox(
                       text = "",
                       padding = 0,
                       fontsize = 20,
-                      foreground = colors["teal"],
+                      foreground = colors["mauve"],
                       background = colors["black0"],
                       ),
               widget.TextBox(
@@ -286,7 +286,7 @@ screens = [
               widget.Clock(
                        foreground = colors["black0"],
                        background = colors["pink"],
-                       format = " %a %d %b, %H:%M",
+                       format = " %a, %d %b - %H:%M",
                        padding = 5
                        ),
               widget.TextBox(
@@ -297,7 +297,7 @@ screens = [
                        background = colors["black0"]
                        ),
             ],
-            22,
+            20,
         ),
             wallpaper = '~/Imagens/wallpaper.jpg',
             wallpaper_mode = 'fill',
