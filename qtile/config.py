@@ -134,7 +134,7 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 # Default widget settings
 widget_defaults = dict(
-    font='Hack Nerd Font',
+    font='JetBrainsMono Nerd Font',
     fontsize=14,
     padding=2,
     background = colors["black0"]
@@ -146,7 +146,7 @@ screens = [
         top=bar.Bar(
             [  
               widget.GroupBox(
-                       font = "Hack Nerd Font",
+                       font = "JetBrainsMono Nerd Font",
                        fontsize = 14,
                        margin_y = 3,
                        margin_x = 0,
@@ -167,7 +167,7 @@ screens = [
                        ),
              widget.TextBox(
                        text = '|',
-                       font = "Hack Nerd Font",
+                       font = "JetBrainsMono Nerd Font",
                        foreground = colors["gray0"],
                        background = colors["black0"],
                        padding = 2,
@@ -187,7 +187,7 @@ screens = [
                        ),
              widget.TextBox(
                        text = '|',
-                       font = "Hack Nerd Font",
+                       font = "JetBrainsMono Nerd Font",
                        foreground = colors["gray0"],
                        background = colors["black0"],
                        padding = 2,
