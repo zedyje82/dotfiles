@@ -24,7 +24,8 @@ keys = [
     # Launch staff
     Key([mod], "Return", lazy.spawn(my_terminal), desc="alacritty"),
     Key([mod], "b", lazy.spawn(my_browser), desc="firefox"),
-    Key([mod], "p", lazy.spawn("rofi -show drun"), desc="rofi"),
+    Key([mod], "d", lazy.spawn("rofi -show drun"), desc="rofi"),
+    Key([mod], "t", lazy.spawn("alacritty -e htop"), desc="htop"),
     Key([mod], "f", lazy.spawn(my_file_manager), desc="pcmanfm"),
 
     # Audio control
@@ -37,7 +38,7 @@ keys = [
     Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 15")),
 
     # Screenshot
-    Key([mod], "z", lazy.spawn(screenshot)),
+    Key([mod], "Print", lazy.spawn(screenshot)),
 
     # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
