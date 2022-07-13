@@ -150,7 +150,7 @@ screens = [
     Screen(
         top=bar.Bar(
             [  
-              widget.GroupBox(
+             widget.GroupBox(
                        font = "JetBrainsMono Nerd Font",
                        fontsize = 14,
                        margin_y = 3,
