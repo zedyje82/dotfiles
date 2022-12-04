@@ -8,9 +8,8 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, 
 from libqtile.lazy import lazy
 from libqtile.command import lazy
 from typing import List
-
 from qtile_extras import widget
-from qtile_extras.widget.decorations import BorderDecoration
+from qtile_extras.widget.decorations import PowerLineDecoration
 
 # Variables
 mod = "mod4"
@@ -86,8 +85,7 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
 
-groups = [Group(i) for i in ["WEB", "DEV", "SYS", "DOC",
-                             "VBOX", "CHAT", "MUS", "VID", "GAME"]]
+groups = [Group(i) for i in ["一", "二", "三", "四", "五", "六", "七", "八", "九"]]
 group_hotkey = "123456789"
 
 for g, k in zip(groups, group_hotkey):
@@ -108,36 +106,30 @@ groups.append(ScratchPad('scratchpad', [
 ]))
 # extend keys list with keybinding for scratchpad
 keys.extend([
-    Key([mod], "n",
+    Key([mod, "shift"], "n",
         lazy.group['scratchpad'].dropdown_toggle('my_terminal')),
 ])
 
 # Colors
 colors = {
-    "flamingo": "#F3CDCD",
-    "mauve": "#DDB6F2",
-    "pink": "#f5c2e7",
-    "maroon": "#e8a2af",
-    "red": "#f28fad",
-    "peach": "#f8bd96",
-    "yellow": "#fae3b0",
-    "green": "#abe9b3",
-    "teal": "#b4e8e0",
-    "blue": "#96cdfb",
-    "sky": "#89dceb",
-    "white": "#d9e0ee",
-    "white1": "#FAF9F6",
-    "gray": "#6e6c7e",
-    "black": "#1a1826",
-    "black1": "#575268",
+    "black": '#21222c',
+    "red": '#ff5555',
+    "green": '#50fa7b',
+    "yellow": '#f1fa8c',
+    "blue": '#bd93f9',
+    "magenta": '#ff79c6',
+    "cyan": '#8be9fd',
+    "white": '#f8f8f2',
+    "bg": '#282a36',
+    "fg": '#f8f8f2',
 }
 
 # Default theme for layouts
 layout_theme = {
     "border_width": 2,
     "margin": 4,
-    "border_focus": colors["maroon"],
-    "border_normal": colors["black"],
+    "border_focus": colors["blue"],
+    "border_normal": colors["bg"],
 }
 
 # Layouts to be used
@@ -155,171 +147,146 @@ widget_defaults = dict(
     font='JetBrainsMono Nerd Font',
     fontsize=14,
     padding=2,
-    background=colors["black"],
+    background=colors["bg"],
 )
 extension_defaults = widget_defaults.copy()
+
+powerline = {
+    "decorations": [
+        PowerLineDecoration(
+            path='forward_slash'
+        )
+    ]
+}
+powerline2 = {
+    "decorations": [
+        PowerLineDecoration(
+            path='back_slash'
+        )
+    ]
+}
 
 screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.Image(
-                    filename="~/.config/qtile/icons/python.png",
-                    scale="False",
-                    mouse_callbacks={
-                        'Button1': lambda: qtile.cmd_spawn(my_terminal)}
-                ),
-                widget.TextBox(
-                    text="|",
-                    padding=0,
-                    fontsize=12,
-                    foreground='474747',
-                    background=colors["black"],
-                ),
                 widget.GroupBox(
-                    active=colors["white"],
-                    inactive=colors["yellow"],
+                    active=colors["yellow"],
+                    inactive=colors["blue"],
                     rounded=False,
-                    highlight_color=[colors["black"]],
+                    highlight_color=[colors["bg"], colors["yellow"]],
                     highlight_method="line",
-                    this_current_screen_border=colors["blue"],
+                    this_current_screen_border=colors["yellow"],
                     this_screen_border=colors["green"],
-                    other_current_screen_border=colors["blue"],
+                    other_current_screen_border=colors["yellow"],
                     other_screen_border=colors["green"],
-                    foreground=colors["white"],
-                    background=colors["black"],
-                ),
-                widget.TextBox(
-                    text="|",
-                    padding=0,
-                    fontsize=12,
-                    foreground='474747',
-                    background=colors["black"],
+                    foreground=colors["black"],
+                    background=colors["bg"],
+                    **powerline2
                 ),
                 widget.CurrentLayoutIcon(
                     custom_icon_paths=[os.path.expanduser(
                         "~/.config/qtile/icons")],
-                    foreground=colors["white1"],
-                    background=colors["black"],
+                    foreground=colors["black"],
+                    background=colors["blue"],
                     padding=0,
-                    scale=0.7
+                    scale=0.7,
                 ),
                 widget.CurrentLayout(
-                    foreground=colors["white1"],
-                    background=colors["black"],
-                    padding=5
+                    foreground=colors["black"],
+                    background=colors["blue"],
+                    padding=5,
+                    **powerline2
+                ),
+                widget.Sep(
+                    linewidth=0,
+                    padding=0,
+                    foreground=colors["black"],
+                    background=colors["blue"],
                 ),
                 widget.TextBox(
                     text="|",
                     padding=0,
                     fontsize=12,
                     foreground='474747',
-                    background=colors["black"],
+                    background=colors["bg"],
                 ),
-                widget.TaskList(
-                    icon_size=0,
-                    foreground=colors["white1"],
-                    background=colors["black"],
-                    borderwidth=1,
-                    border=colors["gray"],
-                    margin=0,
-                    padding=1,
-                    highlight_method="block",
-                    title_width_method="uniform",
-                    urgent_alert_method="border",
-                    urgent_border=colors["mauve"],
-                    rounded=False,
-                    txt_floating="缾 ",
-                    txt_maximized="类 ",
-                    txt_minimized="絛 ",
+                widget.WindowName(
+                    foreground=colors["yellow"],
+                    background=colors["bg"],
+                    padding=0,
                 ),
                 widget.TextBox(
                     text="|",
                     padding=0,
                     fontsize=12,
                     foreground='474747',
-                    background=colors["black"],
+                    background=colors["bg"],
+                    **powerline
                 ),
                 widget.Systray(
-                    padding=0
+                    padding=5,
+                    foreground=colors["black"],
+                    background=colors["blue"],
+                    **powerline
                 ),
                 widget.Sep(
                     linewidth=0,
-                    padding=5,
+                    padding=0,
                     foreground=colors["black"],
-                    background=colors["black"]
+                    background=colors["yellow"],
                 ),
                 widget.CPU(
-                    format=" CPU {load_percent:04}%",
-                    foreground=colors["maroon"],
-                    background=colors["black"],
+                    format=" {load_percent:04}%",
+                    foreground=colors["black"],
+                    background=colors["yellow"],
                     padding=5,
-                    decorations=[
-                        BorderDecoration(
-                            colour=colors["maroon"],
-                            border_width=[0, 0, 2, 0],
-                        )
-                    ],
+                    **powerline
                 ),
                 widget.Sep(
                     linewidth=0,
                     padding=5,
                     foreground=colors["black"],
-                    background=colors["black"]
+                    background=colors["blue"]
                 ),
                 widget.Memory(
-                    format=' Mem {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
-                    foreground=colors["peach"],
-                    background=colors["black"],
+                    format=' {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
+                    measure_mem='G',
+                    foreground=colors["black"],
+                    background=colors["blue"],
                     padding=5,
-                    decorations=[
-                        BorderDecoration(
-                            colour=colors["peach"],
-                            border_width=[0, 0, 2, 0],
-                        )
-                    ],
+                    **powerline
                 ),
                 widget.Sep(
                     linewidth=0,
                     padding=5,
                     foreground=colors["black"],
-                    background=colors["black"]
+                    background=colors["yellow"]
                 ),
                 widget.Volume(
                     fmt="墳 {}",
                     mute_command="amixer -D pulse set Master toggle",
-                    foreground=colors["sky"],
-                    background=colors["black"],
+                    foreground=colors["black"],
+                    background=colors["yellow"],
                     padding=5,
-                    decorations=[
-                        BorderDecoration(
-                            colour=colors["sky"],
-                            border_width=[0, 0, 2, 0],
-                        )
-                    ],
+                    **powerline
                 ),
                 widget.Sep(
                     linewidth=0,
                     padding=5,
                     foreground=colors["black"],
-                    background=colors["black"]
+                    background=colors["blue"]
                 ),
                 widget.Clock(
-                    format=" %d %b - %H:%M",
-                    foreground=colors["pink"],
-                    background=colors["black"],
+                    format=" %d de %b - %H:%M",
+                    foreground=colors["black"],
+                    background=colors["blue"],
                     padding=5,
-                    decorations=[
-                        BorderDecoration(
-                            colour=colors["pink"],
-                            border_width=[0, 0, 2, 0],
-                        )
-                    ],
                 ),
             ],
             20,
         ),
-        wallpaper='~/Pictures/wallpaper/wallpaper_4.jpg',
+        wallpaper='~/Pictures/wallpaper/sla1.jpeg',
         wallpaper_mode='fill',
     ),
 ]
