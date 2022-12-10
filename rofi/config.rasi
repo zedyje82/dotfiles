@@ -1,0 +1,15 @@
+configuration{
+    modi: "drun,window";
+    icon-theme: "Papirus dark";
+    show-icons: true;
+    terminal: "alacritty";
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    display-drun: "   Apps ";
+    display-window: " 﩯  Window";
+    sidebar-mode: true;
+}
+
+@theme "dracula"
