@@ -15,8 +15,8 @@ from qtile_extras.widget.decorations import PowerLineDecoration
 mod = "mod4"
 my_terminal = "alacritty"
 my_browser = "firefox"
-my_file_manager = "thunar"
-screenshot = "scrot -e 'mv $f ~/Pictures/screenshots/Screenshot%Y-%m-%d%H:%M:%S.png'"
+my_file_manager = "pcmanfm"
+screenshot = "scrot -e 'mv $f ~/Pictures/screenshots/Screenshot_%d-%m-%Y_%H:%M:%S.png'"
 
 # Shortcuts
 keys = [
@@ -115,7 +115,7 @@ colors = {
     "black": '#21222c',
     "red": '#ff5555',
     "green": '#50fa7b',
-    "yellow": '#f1fa8c',
+    "yellow": '#f1fa8c',  # f1c40f
     "blue": '#bd93f9',
     "magenta": '#ff79c6',
     "cyan": '#8be9fd',
@@ -173,14 +173,12 @@ screens = [
                 widget.GroupBox(
                     active=colors["yellow"],
                     inactive=colors["blue"],
-                    rounded=False,
-                    highlight_color=[colors["bg"], colors["yellow"]],
-                    highlight_method="line",
+                    disable_drag=True,
+                    highlight_color=[colors["yellow"], colors["yellow"]],
+                    block_highlight_text_color=colors["blue"],
                     this_current_screen_border=colors["yellow"],
-                    this_screen_border=colors["green"],
                     other_current_screen_border=colors["yellow"],
-                    other_screen_border=colors["green"],
-                    foreground=colors["black"],
+                    highlight_method="line",
                     background=colors["bg"],
                     **powerline2
                 ),
@@ -196,6 +194,13 @@ screens = [
                     foreground=colors["black"],
                     background=colors["blue"],
                     padding=5,
+                    **powerline2
+                ),
+                widget.WindowCount(
+                    text_format='缾 {num}',
+                    foreground=colors["black"],
+                    background=colors['yellow'],
+                    show_zero=True,
                     **powerline2
                 ),
                 widget.Sep(
@@ -222,12 +227,11 @@ screens = [
                     fontsize=12,
                     foreground='474747',
                     background=colors["bg"],
-                    **powerline
                 ),
                 widget.Systray(
-                    padding=5,
+                    padding=0,
                     foreground=colors["black"],
-                    background=colors["blue"],
+                    background=colors["bg"],
                     **powerline
                 ),
                 widget.Sep(
@@ -278,7 +282,7 @@ screens = [
                     background=colors["blue"]
                 ),
                 widget.Clock(
-                    format=" %d de %b - %H:%M",
+                    format=" %d/%m/%y - %H:%M",
                     foreground=colors["black"],
                     background=colors["blue"],
                     padding=5,
@@ -286,7 +290,7 @@ screens = [
             ],
             20,
         ),
-        wallpaper='~/Pictures/wallpaper/sla1.jpeg',
+        wallpaper='~/Pictures/wallpaper/img-4.jpg',
         wallpaper_mode='fill',
     ),
 ]
