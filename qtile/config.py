@@ -9,13 +9,12 @@ from libqtile.lazy import lazy
 from libqtile.command import lazy
 from typing import List
 from qtile_extras import widget
-from qtile_extras.widget.decorations import PowerLineDecoration
 
 # Variables
 mod = "mod4"
 my_terminal = "alacritty"
 my_browser = "firefox"
-my_file_manager = "pcmanfm"
+my_file_manager = "thunar"
 screenshot = "scrot -e 'mv $f ~/Pictures/screenshots/Screenshot_%d-%m-%Y_%H:%M:%S.png'"
 
 # Shortcuts
@@ -24,8 +23,8 @@ keys = [
     # Launch staff
     Key([mod], "Return", lazy.spawn(my_terminal), desc="alacritty"),
     Key([mod], "b", lazy.spawn(my_browser), desc="firefox"),
-    Key([mod], "d", lazy.spawn("rofi -show drun"), desc="rofi"),
-    Key([mod], "t", lazy.spawn("alacritty -e htop"), desc="htop"),
+    Key([mod], "d", lazy.spawn("rofi -show drun -show-icons"), desc="rofi"),
+    Key([mod], "t", lazy.spawn("alacritty -e bashtop"), desc="bashtop"),
     Key([mod], "f", lazy.spawn(my_file_manager), desc="thunar"),
 
     # Audio control
@@ -85,7 +84,21 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
 
-groups = [Group(i) for i in ["一", "二", "三", "四", "五", "六", "七", "八", "九"]]
+groups = [Group("", layout='monadtall'),
+          Group("﬏", layout='monadtall'),
+          Group("", layout='monadtall'),
+          Group("", layout='monadtall',
+                matches=[Match(wm_class=["Thunar"])]),
+          Group("", layout='monadtall',
+                matches=[Match(wm_class=["lxappearance", "Pavucontrol"])]),
+          Group("", layout='monadtall'),
+          Group("", layout='monadtall'),
+          Group("ﭮ", layout='monadtall',
+                matches=[Match(wm_class=["discord-screenaudio"])]),
+          Group("", layout='monadtall',
+                matches=[Match(wm_class=["Steam", "lutris"])])
+          ]
+
 group_hotkey = "123456789"
 
 for g, k in zip(groups, group_hotkey):
@@ -112,10 +125,11 @@ keys.extend([
 
 # Colors
 colors = {
+    "gray": '#808080',
     "black": '#21222c',
     "red": '#ff5555',
     "green": '#50fa7b',
-    "yellow": '#f1fa8c',  # f1c40f
+    "yellow": '#f1fa8c',
     "blue": '#bd93f9',
     "magenta": '#ff79c6',
     "cyan": '#8be9fd',
@@ -135,8 +149,8 @@ layout_theme = {
 # Layouts to be used
 layouts = [
     layout.MonadTall(**layout_theme, ratio=0.55),
-    layout.Max(),
     layout.Floating(**layout_theme),
+    layout.Max(),
 ]
 
 # Define prompt
@@ -144,156 +158,141 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 # Default widget settings
 widget_defaults = dict(
-    font='JetBrainsMono Nerd Font',
-    fontsize=14,
+    font='Ubuntu Nerd Font',
+    fontsize=12,
     padding=2,
     background=colors["bg"],
 )
 extension_defaults = widget_defaults.copy()
-
-powerline = {
-    "decorations": [
-        PowerLineDecoration(
-            path='forward_slash'
-        )
-    ]
-}
-powerline2 = {
-    "decorations": [
-        PowerLineDecoration(
-            path='back_slash'
-        )
-    ]
-}
 
 screens = [
     Screen(
         top=bar.Bar(
             [
                 widget.GroupBox(
-                    active=colors["yellow"],
-                    inactive=colors["blue"],
+                    highlight_method='block',
+                    this_current_screen_border=colors['blue'],
+                    inactive=colors["gray"],
+                    active=colors["white"],
                     disable_drag=True,
-                    highlight_color=[colors["yellow"], colors["yellow"]],
-                    block_highlight_text_color=colors["blue"],
-                    this_current_screen_border=colors["yellow"],
-                    other_current_screen_border=colors["yellow"],
-                    highlight_method="line",
-                    background=colors["bg"],
-                    **powerline2
-                ),
-                widget.CurrentLayoutIcon(
-                    custom_icon_paths=[os.path.expanduser(
-                        "~/.config/qtile/icons")],
-                    foreground=colors["black"],
-                    background=colors["blue"],
-                    padding=0,
-                    scale=0.7,
-                ),
-                widget.CurrentLayout(
-                    foreground=colors["black"],
-                    background=colors["blue"],
+                    fontsize=14,
                     padding=5,
-                    **powerline2
+                ),
+                widget.Sep(
+                    fontsize=12,
+                    foreground='474747',
+                    padding=10,
+                ),
+                widget.TextBox(
+                    text='缾',
+                    fontsize=14,
+                    foreground=colors['white'],
+                    padding=5,
                 ),
                 widget.WindowCount(
-                    text_format='缾 {num}',
-                    foreground=colors["black"],
-                    background=colors['yellow'],
+                    text_format='{num}',
                     show_zero=True,
-                    **powerline2
+                    foreground=colors["blue"],
                 ),
                 widget.Sep(
-                    linewidth=0,
-                    padding=0,
-                    foreground=colors["black"],
-                    background=colors["blue"],
-                ),
-                widget.TextBox(
-                    text="|",
-                    padding=0,
                     fontsize=12,
                     foreground='474747',
-                    background=colors["bg"],
+                    padding=10,
                 ),
                 widget.WindowName(
-                    foreground=colors["yellow"],
-                    background=colors["bg"],
-                    padding=0,
+                    foreground=colors["blue"],
+                ),
+                widget.Spacer(
                 ),
                 widget.TextBox(
-                    text="|",
-                    padding=0,
-                    fontsize=12,
-                    foreground='474747',
-                    background=colors["bg"],
-                ),
-                widget.Systray(
-                    padding=0,
-                    foreground=colors["black"],
-                    background=colors["bg"],
-                    **powerline
-                ),
-                widget.Sep(
-                    linewidth=0,
-                    padding=0,
-                    foreground=colors["black"],
-                    background=colors["yellow"],
-                ),
-                widget.CPU(
-                    format=" {load_percent:04}%",
-                    foreground=colors["black"],
-                    background=colors["yellow"],
+                    text='',
+                    fontsize=14,
+                    foreground=colors['white'],
                     padding=5,
-                    **powerline
-                ),
-                widget.Sep(
-                    linewidth=0,
-                    padding=5,
-                    foreground=colors["black"],
-                    background=colors["blue"]
-                ),
-                widget.Memory(
-                    format=' {MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
-                    measure_mem='G',
-                    foreground=colors["black"],
-                    background=colors["blue"],
-                    padding=5,
-                    **powerline
-                ),
-                widget.Sep(
-                    linewidth=0,
-                    padding=5,
-                    foreground=colors["black"],
-                    background=colors["yellow"]
-                ),
-                widget.Volume(
-                    fmt="墳 {}",
-                    mute_command="amixer -D pulse set Master toggle",
-                    foreground=colors["black"],
-                    background=colors["yellow"],
-                    padding=5,
-                    **powerline
-                ),
-                widget.Sep(
-                    linewidth=0,
-                    padding=5,
-                    foreground=colors["black"],
-                    background=colors["blue"]
                 ),
                 widget.Clock(
-                    format=" %d/%m/%y - %H:%M",
-                    foreground=colors["black"],
-                    background=colors["blue"],
+                    format='%d %b, %H:%M %p',
+                    foreground=colors['blue'],
+                ),
+                widget.Spacer(
+                ),
+                widget.Systray(
+                    foreground=colors["white"],
                     padding=5,
                 ),
+                widget.Sep(
+                    fontsize=12,
+                    foreground='474747',
+                    padding=10,
+                ),
+                widget.TextBox(
+                    text='墳',
+                    fontsize=14,
+                    foreground=colors['white'],
+                    padding=0,
+                ),
+                widget.Volume(
+                    mute_command="amixer -D pulse set Master toggle",
+                    foreground=colors["blue"],
+                    padding=5,
+                ),
+                widget.Sep(
+                    fontsize=12,
+                    foreground='474747',
+                    padding=10,
+                ),
+                widget.TextBox(
+                    text='',
+                    fontsize=14,
+                    foreground=colors['white'],
+                    padding=0,
+                ),
+                widget.KeyboardLayout(
+                    configured_keyboards=['br', 'us'],
+                    foreground=colors['blue'],
+                    padding=5
+                ),
+                widget.Sep(
+                    fontsize=12,
+                    foreground='474747',
+                    padding=10,
+                ),
+                widget.CurrentLayoutIcon(
+                    scale=0.7,
+                    use_mask=True,
+                    foreground=colors['white'],
+                    padding=0,
+                ),
+                widget.CurrentLayout(
+                    foreground=colors['blue'],
+                    padding=5,
+                ),
+                widget.Sep(
+                    fontsize=12,
+                    foreground='474747',
+                    padding=10,
+                ),
+                widget.TextBox(
+                    text="",
+                    mouse_callbacks={
+                        "Button1": lazy.spawn("systemctl poweroff"),
+                    },
+                    foreground=colors["cyan"],
+                    padding=0,
+                ),
+                widget.Sep(
+                    linewidth=0,
+                    padding=10,
+                ),
             ],
-            20,
+            size=20,
+            margin=[5, 5, 0, 5],
         ),
-        wallpaper='~/Pictures/wallpaper/img-4.jpg',
+        wallpaper='~/.config/qtile/wallpaper/img-2.png',
         wallpaper_mode='fill',
     ),
 ]
+
 
 # Drag floating layouts.
 mouse = [
