@@ -85,18 +85,20 @@ keys = [
 ]
 
 groups = [Group("", layout='monadtall'),
-          Group("﬏", layout='monadtall'),
+          Group("﬏", layout='monadtall',
+                matches=[Match(wm_class=["code"])]),
           Group("", layout='monadtall'),
           Group("", layout='monadtall',
                 matches=[Match(wm_class=["Thunar"])]),
           Group("", layout='monadtall',
                 matches=[Match(wm_class=["lxappearance", "Pavucontrol"])]),
           Group("", layout='monadtall'),
-          Group("", layout='monadtall'),
+          Group("", layout='monadtall',
+                matches=[Match(wm_class=["spotify"])]),
           Group("ﭮ", layout='monadtall',
                 matches=[Match(wm_class=["discord-screenaudio"])]),
           Group("", layout='monadtall',
-                matches=[Match(wm_class=["Steam", "lutris"])])
+                matches=[Match(wm_class=["Steam", "lutris", "Heroic"])])
           ]
 
 group_hotkey = "123456789"
@@ -276,6 +278,7 @@ screens = [
                     text="",
                     mouse_callbacks={
                         "Button1": lazy.spawn("systemctl poweroff"),
+                        "Button2": lazy.spawn("systemctl reboot"),
                     },
                     foreground=colors["cyan"],
                     padding=0,
