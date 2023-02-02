@@ -228,6 +228,26 @@ screens = [
                     padding=10,
                 ),
                 widget.TextBox(
+                    text='ﮮ',
+                    fontsize=14,
+                    foreground=colors['white'],
+                    padding=0,
+                ),
+                widget.CheckUpdates(
+                    distro='Arch_checkupdates',
+                    display_format="{updates}",
+                    no_update_string='n/a',
+                    update_interval=120,
+                    colour_have_updates=colors['cyan'],
+                    colour_no_updates=colors['blue'],
+                    padding=5,
+                ),
+                widget.Sep(
+                    fontsize=12,
+                    foreground='474747',
+                    padding=10,
+                ),
+                widget.TextBox(
                     text='墳',
                     fontsize=14,
                     foreground=colors['white'],
@@ -291,7 +311,7 @@ screens = [
             size=20,
             margin=[5, 5, 0, 5],
         ),
-        wallpaper='~/.config/qtile/wallpaper/img-2.png',
+        wallpaper='~/.config/qtile/wallpaper/img-5.png',
         wallpaper_mode='fill',
     ),
 ]
