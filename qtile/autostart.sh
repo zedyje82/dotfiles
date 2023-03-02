@@ -9,4 +9,5 @@ function run {
 
 run nvidia-settings -l &
 run udiskie -A -t &
+run dunst &
 run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
