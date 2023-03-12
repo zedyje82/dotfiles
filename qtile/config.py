@@ -8,14 +8,13 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, 
 from libqtile.lazy import lazy
 from libqtile.command import lazy
 from typing import List
-from qtile_extras import widget
 
 # Variables
 mod = "mod4"
 my_terminal = "alacritty"
 my_browser = "firefox"
 my_file_manager = "thunar"
-screenshot = "scrot -e 'mv $f ~/Pictures/screenshots/Screenshot_%d-%m-%Y_%H:%M:%S.png'"
+screenshot = "scrot -e 'mv $f ~/Imagens/screenshots/Screenshot_%d-%m-%Y_%H:%M:%S.png'"
 
 # Shortcuts
 keys = [
@@ -152,7 +151,7 @@ layout_theme = {
 layouts = [
     layout.MonadTall(**layout_theme, ratio=0.55),
     layout.Floating(**layout_theme),
-    layout.Max(),
+    layout.Max(**layout_theme),
 ]
 
 # Define prompt
@@ -234,9 +233,10 @@ screens = [
                     padding=0,
                 ),
                 widget.CheckUpdates(
-                    distro='Arch_checkupdates',
+                    distro="Arch_checkupdates",
                     display_format="{updates}",
                     no_update_string='n/a',
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(my_terminal + ' -e sudo pacman -Syu')},
                     update_interval=120,
                     colour_have_updates=colors['cyan'],
                     colour_no_updates=colors['blue'],
@@ -311,7 +311,7 @@ screens = [
             size=20,
             margin=[5, 5, 0, 5],
         ),
-        wallpaper='~/.config/qtile/wallpaper/img-5.png',
+        wallpaper='~/.config/qtile/wallpaper/img-0.png',
         wallpaper_mode='fill',
     ),
 ]
