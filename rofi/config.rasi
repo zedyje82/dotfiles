@@ -16,7 +16,6 @@ configuration {
   fg: #FFFFFF;
   fg-alt: #828791;
 
-  /* accent-color: #bd93f9; */
   accent-color: #bd93f9;
 
   background-color: transparent;
@@ -29,8 +28,8 @@ configuration {
 
 window {
   width: 35%;
-  /* border: 2;
-  border-color: #3477ad; */
+  border: 2;
+  border-color: #bd93f9; 
 }
 
 element {
@@ -41,7 +40,7 @@ element {
 element selected {
   background-color: @accent-color;
   text-color: @fg;
-  /* border-radius: 15px; */
+  border-radius: 15px; 
 }
 
 element-text {
