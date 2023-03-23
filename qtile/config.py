@@ -32,8 +32,8 @@ keys = [
     Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute 0 toggle")),
 
     # Screen brightness control
-    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 15")),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 15")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl -inc 15")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl -dec 15")),
 
     # Screenshot
     Key([mod], "Print", lazy.spawn(screenshot)),
@@ -85,12 +85,12 @@ keys = [
 
 groups = [Group("", layout='monadtall'),
           Group("﬏", layout='monadtall',
-                matches=[Match(wm_class=["code"])]),
+                matches=[Match(wm_class=["code", "gnome-boxes"])]),
           Group("", layout='monadtall'),
           Group("", layout='monadtall',
                 matches=[Match(wm_class=["Thunar"])]),
           Group("", layout='monadtall',
-                matches=[Match(wm_class=["lxappearance", "Pavucontrol"])]),
+                matches=[Match(wm_class=["lxappearance", "Pavucontrol", "GParted", "gsmartcontrol"])]),
           Group("", layout='monadtall'),
           Group("", layout='monadtall',
                 matches=[Match(wm_class=["spotify"])]),
@@ -200,9 +200,6 @@ screens = [
                     foreground='474747',
                     padding=10,
                 ),
-                widget.WindowName(
-                    foreground=colors["blue"],
-                ),
                 widget.Spacer(
                 ),
                 widget.TextBox(
@@ -219,27 +216,6 @@ screens = [
                 ),
                 widget.Systray(
                     foreground=colors["white"],
-                    padding=5,
-                ),
-                widget.Sep(
-                    fontsize=12,
-                    foreground='474747',
-                    padding=10,
-                ),
-                widget.TextBox(
-                    text='ﮮ',
-                    fontsize=14,
-                    foreground=colors['white'],
-                    padding=0,
-                ),
-                widget.CheckUpdates(
-                    distro="Arch_checkupdates",
-                    display_format="{updates}",
-                    no_update_string='n/a',
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(my_terminal + ' -e sudo pacman -Syu')},
-                    update_interval=120,
-                    colour_have_updates=colors['cyan'],
-                    colour_no_updates=colors['blue'],
                     padding=5,
                 ),
                 widget.Sep(
@@ -311,7 +287,7 @@ screens = [
             size=20,
             margin=[5, 5, 0, 5],
         ),
-        wallpaper='~/.config/qtile/wallpaper/img-0.png',
+        wallpaper='~/.config/qtile/wallpaper/img-2.png',
         wallpaper_mode='fill',
     ),
 ]
