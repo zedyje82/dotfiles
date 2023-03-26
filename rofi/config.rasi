@@ -1,10 +1,10 @@
 configuration {
   modes: "drun";
   font: "Ubuntu Nerd Font 12";
-  display-drun: "   Apps:";
+  display-drun: "  Apps:";
   drun-display-format: "{icon} {name}";
   show-icons: true;
-  icon-theme: "Ubuntu Nerd Font 12";
+  icon-theme: "Dracula";
 }
 
 @theme "/dev/null"
