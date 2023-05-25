@@ -7,6 +7,7 @@ function run {
   fi
 }
 
+run xrandr --output DP-0 --mode 1920x1080 --rate 75 &
 run nvidia-settings -l &
 run udiskie -A -t &
 run dunst &
