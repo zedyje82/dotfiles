@@ -10,7 +10,8 @@ from libqtile.command import lazy
 from typing import List
 
 # Variables
-mod = "mod4"
+mod = "mod4" 
+rofi_applets = os.path.expanduser('~') + '/.config/qtile/scripts/'
 my_terminal = "alacritty"
 my_browser = "firefox"
 my_file_manager = "thunar"
@@ -23,6 +24,7 @@ keys = [
     Key([mod], "Return", lazy.spawn(my_terminal), desc="alacritty"),
     Key([mod], "b", lazy.spawn(my_browser), desc="firefox"),
     Key([mod], "d", lazy.spawn("rofi -show drun -show-icons"), desc="rofi"),
+    Key([mod], "x", lazy.spawn(rofi_applets + "powermenu"), desc="powermenu"),
     Key([mod], "t", lazy.spawn("alacritty -e bashtop"), desc="bashtop"),
     Key([mod], "f", lazy.spawn(my_file_manager), desc="thunar"),
 
@@ -30,7 +32,7 @@ keys = [
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume 0 +5%")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume 0 -5%")),
     Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute 0 toggle")),
-
+ 
     # Screen brightness control
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl -inc 15")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl -dec 15")),
@@ -68,12 +70,9 @@ keys = [
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-    Key(
-        [mod, "shift"],
-        "Return",
-        lazy.layout.toggle_split(),
+    Key([mod, "shift"], "Return", lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
-    ),
+        ),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
@@ -83,21 +82,21 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
 
-groups = [Group("", layout='monadtall'),
-          Group("﬏", layout='monadtall',
-                matches=[Match(wm_class=["code", "gnome-boxes"])]),
-          Group("", layout='monadtall'),
-          Group("", layout='monadtall',
+groups = [Group("1", layout='monadtall'),
+          Group("2", layout='monadtall',
+                matches=[Match(wm_class=["code"])]),
+          Group("3", layout='monadtall'),
+          Group("4", layout='monadtall',
                 matches=[Match(wm_class=["Thunar"])]),
-          Group("", layout='monadtall',
+          Group("5", layout='monadtall',
                 matches=[Match(wm_class=["lxappearance", "Pavucontrol", "GParted", "gsmartcontrol"])]),
-          Group("", layout='monadtall'),
-          Group("", layout='monadtall',
+          Group("6", layout='monadtall'),
+          Group("7", layout='monadtall',
                 matches=[Match(wm_class=["spotify"])]),
-          Group("ﭮ", layout='monadtall',
+          Group("8", layout='monadtall',
                 matches=[Match(wm_class=["discord-screenaudio"])]),
-          Group("", layout='monadtall',
-                matches=[Match(wm_class=["Steam", "lutris", "Heroic"])])
+          Group("9", layout='monadtall',
+                matches=[Match(wm_class=["steam", "lutris", "Heroic"])])
           ]
 
 group_hotkey = "123456789"
@@ -126,24 +125,25 @@ keys.extend([
 
 # Colors
 colors = {
-    "gray": '#808080',
-    "black": '#21222c',
-    "red": '#ff5555',
-    "green": '#50fa7b',
-    "yellow": '#f1fa8c',
-    "blue": '#bd93f9',
-    "magenta": '#ff79c6',
-    "cyan": '#8be9fd',
-    "white": '#f8f8f2',
     "bg": '#282a36',
+    "cl": '#44475a',
     "fg": '#f8f8f2',
+    "cyan": '#8be9fd',
+    "gray": '#808080',
+    "green": '#50fa7b',
+    "orange": '#ffb86c',
+    "pink": '#ff79c6',
+    "purple": '#bd93f9',
+    "red": '#ff5555',
+    "yellow": '#f1fa8c',
+    "black": '#21222c',
 }
 
 # Default theme for layouts
 layout_theme = {
     "border_width": 2,
     "margin": 4,
-    "border_focus": colors["blue"],
+    "border_focus": colors["purple"],
     "border_normal": colors["bg"],
 }
 
@@ -159,7 +159,7 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 # Default widget settings
 widget_defaults = dict(
-    font='Ubuntu Nerd Font',
+    font='JetBrainsMono Nerd Font',
     fontsize=12,
     padding=2,
     background=colors["bg"],
@@ -170,86 +170,6 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.GroupBox(
-                    highlight_method='block',
-                    this_current_screen_border=colors['blue'],
-                    inactive=colors["gray"],
-                    active=colors["white"],
-                    disable_drag=True,
-                    fontsize=14,
-                    padding=5,
-                ),
-                widget.Sep(
-                    fontsize=12,
-                    foreground='474747',
-                    padding=10,
-                ),
-                widget.TextBox(
-                    text='缾',
-                    fontsize=14,
-                    foreground=colors['white'],
-                    padding=5,
-                ),
-                widget.WindowCount(
-                    text_format='{num}',
-                    show_zero=True,
-                    foreground=colors["blue"],
-                ),
-                widget.Sep(
-                    fontsize=12,
-                    foreground='474747',
-                    padding=10,
-                ),
-                widget.Spacer(
-                ),
-                widget.TextBox(
-                    text='',
-                    fontsize=14,
-                    foreground=colors['white'],
-                    padding=5,
-                ),
-                widget.Clock(
-                    format='%d %b, %H:%M %p',
-                    foreground=colors['blue'],
-                ),
-                widget.Spacer(
-                ),
-                widget.Systray(
-                    foreground=colors["white"],
-                    padding=5,
-                ),
-                widget.Sep(
-                    fontsize=12,
-                    foreground='474747',
-                    padding=10,
-                ),
-                widget.TextBox(
-                    text='墳',
-                    fontsize=14,
-                    foreground=colors['white'],
-                    padding=0,
-                ),
-                widget.Volume(
-                    mute_command="amixer -D pulse set Master toggle",
-                    foreground=colors["blue"],
-                    padding=5,
-                ),
-                widget.Sep(
-                    fontsize=12,
-                    foreground='474747',
-                    padding=10,
-                ),
-                widget.TextBox(
-                    text='',
-                    fontsize=14,
-                    foreground=colors['white'],
-                    padding=0,
-                ),
-                widget.KeyboardLayout(
-                    configured_keyboards=['br', 'us'],
-                    foreground=colors['blue'],
-                    padding=5
-                ),
                 widget.Sep(
                     fontsize=12,
                     foreground='474747',
@@ -258,11 +178,23 @@ screens = [
                 widget.CurrentLayoutIcon(
                     scale=0.7,
                     use_mask=True,
-                    foreground=colors['white'],
+                    foreground=colors['fg'],
                     padding=0,
                 ),
-                widget.CurrentLayout(
-                    foreground=colors['blue'],
+                widget.Sep(
+                    fontsize=12,
+                    foreground='474747',
+                    padding=10,
+                ),
+                widget.GroupBox(
+                    highlight_method='block',
+                    this_current_screen_border=colors['purple'],
+                    inactive=colors["gray"],
+                    active=colors["fg"],
+                    hide_unused = True,
+                    disable_drag=True,
+                    use_mouse_wheel = False,
+                    fontsize=12,
                     padding=5,
                 ),
                 widget.Sep(
@@ -271,23 +203,84 @@ screens = [
                     padding=10,
                 ),
                 widget.TextBox(
-                    text="",
-                    mouse_callbacks={
-                        "Button1": lazy.spawn("systemctl poweroff"),
-                        "Button2": lazy.spawn("systemctl reboot"),
-                    },
-                    foreground=colors["cyan"],
-                    padding=0,
+                    text='󰖲',
+                    fontsize=14,
+                    foreground=colors['fg'],
+                    padding=5,
+                ),
+                widget.WindowCount(
+                    text_format='{num}',
+                    show_zero=True,
+                    foreground=colors["purple"],
                 ),
                 widget.Sep(
-                    linewidth=0,
+                    fontsize=12,
+                    foreground='474747',
+                    padding=10,
+                ),
+                widget.WindowName(
+                    format="{name}",
+                    empty_group_string='Desktop',
+                    foreground=colors["purple"],
+                ),
+                widget.Spacer(
+                ),
+                widget.TextBox(
+                    text='󰅐',
+                    fontsize=14,
+                    foreground=colors['fg'],
+                    padding=5,
+                ),
+                widget.Clock(
+                    format='%d %b, %H:%M',
+                    foreground=colors['purple'],
+                ),
+                widget.Spacer(
+                ),
+                widget.Systray(
+                    foreground=colors["fg"],
+                    padding=5,
+                ),
+                widget.Sep(
+                    fontsize=12,
+                    foreground='474747',
+                    padding=10,
+                ),
+                widget.TextBox(
+                    text='󰕾',
+                    fontsize=14,
+                    foreground=colors['fg'],
+                    padding=5,
+                ),
+                widget.Volume(
+                    mute_command="amixer -D pulse set Master toggle",
+                    foreground=colors["purple"],
+                ),
+                widget.Sep(
+                    fontsize=12,
+                    foreground='474747',
+                    padding=10,
+                ),
+                widget.TextBox(
+                    text='󰌌',
+                    fontsize=14,
+                    foreground=colors['fg'],
+                    padding=5,
+                ),
+                widget.KeyboardLayout(
+                    configured_keyboards=['br', 'us'],
+                    foreground=colors['purple'],
+                ),
+                widget.Sep(
+                    fontsize=12,
+                    foreground='474747',
                     padding=10,
                 ),
             ],
             size=20,
             margin=[5, 5, 0, 5],
         ),
-        wallpaper='~/.config/qtile/wallpaper/img-2.png',
+        wallpaper='~/.config/qtile/wallpaper/img-0.png',
         wallpaper_mode='fill',
     ),
 ]
@@ -334,7 +327,7 @@ wl_input_rules = None
 @hook.subscribe.startup
 def autostart():
     home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/autostart.sh'])
+    subprocess.call([home + '/.config/qtile/scripts/autostart'])
 
 
 wmname = "LG3D"
