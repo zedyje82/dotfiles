@@ -1,4 +1,4 @@
 # My dotfiles
 
 # ShowCase
-![Screenshot_31-01-2023_00:00:04](https://user-images.githubusercontent.com/108900963/215652089-9b0a80b2-c28c-4702-8e88-e5f5a008c741.png)
+![2024-04-15-123339_1680x1050_scrot](https://github.com/zedyje82/dotfiles/assets/108900963/29e1af4c-4489-4776-9d47-d4868712d809)
