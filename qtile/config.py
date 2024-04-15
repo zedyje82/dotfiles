@@ -10,12 +10,12 @@ from libqtile.command import lazy
 from typing import List
 
 # Variables
-mod = "mod4" 
+mod = "mod4"
 rofi_applets = os.path.expanduser('~') + '/.config/qtile/scripts/'
 my_terminal = "alacritty"
 my_browser = "firefox"
 my_file_manager = "thunar"
-screenshot = "scrot -e 'mv $f ~/Imagens/screenshots/Screenshot_%d-%m-%Y_%H:%M:%S.png'"
+screenshot = "scrot -e 'mv $f ~/Imagens/Screenshots/Screenshot_%d-%m-%Y_%H:%M:%S.png'"
 
 # Shortcuts
 keys = [
@@ -32,13 +32,12 @@ keys = [
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume 0 +5%")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume 0 -5%")),
     Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute 0 toggle")),
- 
     # Screen brightness control
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl -inc 15")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl -dec 15")),
 
     # Screenshot
-    Key([mod], "Print", lazy.spawn(screenshot)),
+    Key([mod], "Home", lazy.spawn(screenshot)),
 
     # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -89,12 +88,12 @@ groups = [Group("1", layout='monadtall'),
           Group("4", layout='monadtall',
                 matches=[Match(wm_class=["Thunar"])]),
           Group("5", layout='monadtall',
-                matches=[Match(wm_class=["lxappearance", "Pavucontrol", "GParted", "gsmartcontrol"])]),
+                matches=[Match(wm_class=["lxappearance", "Pavucontrol", "GParted", "gsmartcontrol", "CoreCtrl"])]),
           Group("6", layout='monadtall'),
           Group("7", layout='monadtall',
                 matches=[Match(wm_class=["spotify"])]),
           Group("8", layout='monadtall',
-                matches=[Match(wm_class=["discord-screenaudio"])]),
+                matches=[Match(wm_class=["discord-screenaudio", "discord"])]),
           Group("9", layout='monadtall',
                 matches=[Match(wm_class=["steam", "lutris", "Heroic"])])
           ]
@@ -126,17 +125,11 @@ keys.extend([
 # Colors
 colors = {
     "bg": '#282a36',
-    "cl": '#44475a',
     "fg": '#f8f8f2',
-    "cyan": '#8be9fd',
-    "gray": '#808080',
-    "green": '#50fa7b',
-    "orange": '#ffb86c',
-    "pink": '#ff79c6',
-    "purple": '#bd93f9',
-    "red": '#ff5555',
-    "yellow": '#f1fa8c',
+    "cl": '#44475a',
     "black": '#21222c',
+    "gray": '#808080',
+    "purple": '#bd93f9',
 }
 
 # Default theme for layouts
@@ -189,11 +182,11 @@ screens = [
                 widget.GroupBox(
                     highlight_method='block',
                     this_current_screen_border=colors['purple'],
-                    inactive=colors["gray"],
-                    active=colors["fg"],
-                    hide_unused = True,
+                    inactive=colors['gray'],
+                    active=colors['fg'],
+                    hide_unused=True,
                     disable_drag=True,
-                    use_mouse_wheel = False,
+                    use_mouse_wheel=False,
                     fontsize=12,
                     padding=5,
                 ),
@@ -211,34 +204,29 @@ screens = [
                 widget.WindowCount(
                     text_format='{num}',
                     show_zero=True,
-                    foreground=colors["purple"],
+                    foreground=colors['purple'],
                 ),
                 widget.Sep(
                     fontsize=12,
                     foreground='474747',
                     padding=10,
                 ),
-                widget.WindowName(
-                    format="{name}",
-                    empty_group_string='Desktop',
-                    foreground=colors["purple"],
-                ),
                 widget.Spacer(
                 ),
                 widget.TextBox(
-                    text='󰅐',
+                    text='󰃰',
                     fontsize=14,
                     foreground=colors['fg'],
                     padding=5,
                 ),
                 widget.Clock(
-                    format='%d %b, %H:%M',
+                    format='%d %b %H:%M',
                     foreground=colors['purple'],
                 ),
                 widget.Spacer(
                 ),
                 widget.Systray(
-                    foreground=colors["fg"],
+                    foreground=colors['fg'],
                     padding=5,
                 ),
                 widget.Sep(
@@ -253,8 +241,8 @@ screens = [
                     padding=5,
                 ),
                 widget.Volume(
-                    mute_command="amixer -D pulse set Master toggle",
-                    foreground=colors["purple"],
+                    mute_command='amixer -D pulse set Master toggle',
+                    foreground=colors['purple'],
                 ),
                 widget.Sep(
                     fontsize=12,
@@ -268,7 +256,7 @@ screens = [
                     padding=5,
                 ),
                 widget.KeyboardLayout(
-                    configured_keyboards=['br', 'us'],
+                    configured_keyboards=['us_intl'],
                     foreground=colors['purple'],
                 ),
                 widget.Sep(
@@ -280,7 +268,7 @@ screens = [
             size=20,
             margin=[5, 5, 0, 5],
         ),
-        wallpaper='~/.config/qtile/wallpaper/img-0.png',
+        wallpaper='~/.config/qtile/wallpaper/img-1.png',
         wallpaper_mode='fill',
     ),
 ]

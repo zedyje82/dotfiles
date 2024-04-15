@@ -1,87 +1,9 @@
-configuration {
-  modes: "drun";
-  font: "JetBrainsMono Nerd Font  12";
-  display-drun: " ";
-  drun-display-format: "{icon} {name}";
-  show-icons: true;
-  icon-theme: "Dracula";
+configuration {    
+    modi: ["drun"];
+    display-drun: " ";
+    drun-display-format: "{icon} {name}";
+    show-icons: true;
+    terminal: "alacritty";
 }
 
-@theme "/dev/null"
-
-*{
-  bg: #21222c;
-  bg-alt: #bd93f9;
-
-  fg: #FFFFFF;
-  fg-alt: #828791;
-
-  accent-color: #bd93f9;
-
-  background-color: transparent;
-  
-  border: 0;
-  margin: 0;
-  padding: 0;
-  spacing: 0;
-}
-
-window {
-  width: 35%;
-  border: 2;
-  border-color: #bd93f9;
-}
-
-element {
-  padding: 8 0;
-  text-color: @fg-alt;
-}
-
-element selected {
-  background-color: @accent-color;
-  text-color: @fg;
-  border-radius: 0px; 
-}
-
-element-text {
-  text-color: inherit;
-  vertical-align: 0.5;
-  highlight: none;
-}
-
-element-icon {
-  size: 25;
-  padding: 0 10 0 10;
-}
-
-entry {
-  placeholder: "Search";
-  background-color: @bg-alt;
-  text-color: @fg;
-  padding: 12;
-}
-
-inputbar {
-  children: [prompt, entry];
-  background-image: url("~/.config/rofi/images/img_1.jpg", width);
-  padding: 80px 60px;
-}
-
-listview {
-  padding: 8 12;
-  background-color: @bg;
-  columns: 1;
-  lines: 8;
-}
-
-mainbox {
-  background-color: @bg;
-  children: [inputbar, listview];
-}
-
-prompt {
-  background-color: @bg-alt;
-  enabled: true;
-  padding: 12 0 0 12;
-  text-color: @fg;
-}
+@theme "~/.config/rofi/themes/dracula.rasi"

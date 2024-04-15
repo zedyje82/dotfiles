@@ -1,0 +1,13 @@
+#!/bin/bash
+
+function run {
+  if ! pgrep $1 ;
+  then
+    $@&
+  fi
+}
+
+run xrandr --output DisplayPort-1 --mode 1680x1050 --rate 75 &
+run xrandr --output DisplayPort-1 --set 'scaling mode' 'Full'
+run vibrant-cli DisplayPort-1 1.3 &
+run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
