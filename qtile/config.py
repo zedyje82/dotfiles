@@ -25,7 +25,7 @@ keys = [
     Key([mod], "b", lazy.spawn(my_browser), desc="firefox"),
     Key([mod], "d", lazy.spawn("rofi -show drun -show-icons"), desc="rofi"),
     Key([mod], "x", lazy.spawn(rofi_applets + "powermenu"), desc="powermenu"),
-    Key([mod], "t", lazy.spawn("alacritty -e bashtop"), desc="bashtop"),
+    Key([mod], "t", lazy.spawn("alacritty -e htop"), desc="htop"),
     Key([mod], "f", lazy.spawn(my_file_manager), desc="thunar"),
 
     # Audio control
